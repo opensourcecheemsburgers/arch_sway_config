@@ -1,0 +1,121 @@
+set $mod Mod4
+
+set $term tilix
+set $launcher fuzzel
+
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders smart
+
+smart_gaps on
+gaps inner 10
+
+set $cl_high #009ddc
+set $cl_indi #d9d8d8
+set $cl_back #231f20
+set $cl_fore #d9d8d8
+set $cl_urge #ee2e24
+
+# Colors                border   bg       text     indi     childborder
+client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
+client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
+
+font HackGen35 Console 16
+
+# position should be 0,0 or else it will cause issues with Wine windows not being clickable.
+Output DP-1 resolution 2560x1440 position 0,0
+
+bindsym {
+    $mod+Return exec $term
+    $mod+Delete kill
+    $mod+p exec $launcher
+    $mod+Shift+c reload
+    $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+}
+
+bindsym {
+    $mod+Shift+f exec firefox
+    $mod+Shift+d exec discord
+    $mod+Shift+y exec freetube
+    $mod+Shift+m exec strawberry
+    $mod+Shift+s exec steam
+    $mod+Shift+v exec vscodium
+    $mod+Shift+l exec lapce
+    $mod+Shift+k exec keepassxc
+}
+
+floating_modifier $mod normal
+
+# I like to move it, move it.
+bindsym {
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+}
+
+bindsym {
+    $mod+1 workspace Internet
+    $mod+2 workspace Music
+    $mod+3 workspace Socials
+    $mod+4 workspace Development
+    $mod+5 workspace Terminals
+    $mod+6 workspace Gaming
+    $mod+7 workspace Streaming
+    $mod+8 workspace Freetube
+    $mod+9 workspace Email
+    $mod+0 workspace Terminals
+
+    $mod+Shift+1 move container to workspace Intenet
+    $mod+Shift+2 move container to workspace Music
+    $mod+Shift+3 move container to workspace Socials
+    $mod+Shift+4 move container to workspace Development
+    $mod+Shift+5 move container to workspace Terminals
+    $mod+Shift+6 move container to workspace Gaming
+    $mod+Shift+7 move container to workspace Streaming
+    $mod+Shift+8 move container to workspace Freetube
+    $mod+Shift+9 move container to workspace Email
+    $mod+Shift+0 move container to workspace Terminals
+}
+
+bindsym {
+    $mod+b splith
+    $mod+v splitv
+    $mod+s layout stacking
+    $mod+w layout tabbed
+    $mod+e layout toggle split
+    $mod+f fullscreen
+    $mod+Shift+space floating toggle 
+    $mod+space focus mode_toggle
+    $mod+a focus parent
+}
+
+bindsym {
+    $mod+Shift+minus move scratchpad
+    $mod+minus scratchpad show
+}
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym {
+        Left resize shrink width 10px
+        Down resize grow height 10px
+        Up resize shrink height 10px
+        Right resize grow width 10px
+        
+        Return mode "default" 
+        Escape mode "default"
+        $mod+r mode "default"
+    }
+}
+
+exec_always waybar
+
+include @sysconfdir@/sway/config.d/*
