@@ -21,5 +21,5 @@
 ## Notes
 - I use CoreCtrl to change my gpu's fan speed and clocks.
 - Enabling `AMD FSR` in game seems to give a significant performance increase and reduce stuttering.
-- I recommend using the dxvk-cache file from [here]("https://github.com/Elagoht/overwatch2-dxvkcache/raw/master/Overwatch.dxvk-cache").
+- I recommend using the dxvk-cache file from https://github.com/Elagoht/overwatch2-dxvkcache.
 Place the file in the root of your Overwatch bottle e.g `/home/$USER/bottles/Overwatch`
